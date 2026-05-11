@@ -87,12 +87,12 @@ export default defineConfig({
       { text: 'API', link: '/api/core-functions' },
       { text: 'Examples', link: '/examples' },
       { text: 'Compare', link: '/compare' },
+      { text: 'Orchestration', link: 'https://zenflow.sh' },
       {
         text: 'Links',
         items: [
           { text: 'GitHub', link: 'https://github.com/zendev-sh/goai' },
           { text: 'GoDoc', link: 'https://pkg.go.dev/github.com/zendev-sh/goai' },
-          { text: 'zenflow', link: 'https://zenflow.sh' },
         ],
       },
     ],

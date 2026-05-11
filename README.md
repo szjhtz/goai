@@ -20,7 +20,8 @@
   <a href="https://goai.sh/getting-started/installation">Docs</a> &middot;
   <a href="https://goai.sh/architecture">Architecture</a> &middot;
   <a href="https://goai.sh/providers/">Providers</a> &middot;
-  <a href="https://goai.sh/examples">Examples</a>
+  <a href="https://goai.sh/examples">Examples</a> &middot;
+  <a href="https://zenflow.sh">Orchestration (zenflow)</a>
 </p>
 
 ---
