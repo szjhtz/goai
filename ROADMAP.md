@@ -111,11 +111,18 @@
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Server-executed tool calls round-trip** | Anthropic (`web_search`, `code_execution`, `web_fetch`, `mcp`) and OpenAI Responses (`web_search_call`, `file_search_call`, `code_interpreter_call`, `image_generation_call`, `local_shell_call`, `mcp_call`, `computer_call`) provider-executed tool results are now captured into `ToolCall.Metadata` and re-emitted verbatim when the assistant turn is serialized back, so multi-turn conversations no longer drop server search context or trip Anthropic's orphan-`tool_use` 400. New `bedrock.AnthropicChat` constructor routes Anthropic models through Bedrock InvokeModel / InvokeModelWithResponseStream so the anthropic provider's parsing applies. (#61) |
 
-## v0.7.7 - Current release
+## v0.7.7
 
 | Feature                                       | Description                                                                                                                                                                                                                                                                                                                                                            |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Reasoning-model `max_completion_tokens` fix** | OpenAI-family reasoning models (o-series, gpt-5+, codex) now always get `max_completion_tokens` instead of `max_tokens`. The rename is keyed on the model id rather than on a `reasoning_effort` provider option being present, so `WithMaxOutputTokens` no longer trips an `Unsupported parameter: 'max_tokens'` rejection (observed on Azure gpt-5). (#69) |
+
+## v0.7.8 - Current release
+
+| Feature                               | Description                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SSE scanner accepts large lines**   | `internal/sse` swaps `bufio.Scanner` (1 MiB cap) for a `bufio.Reader`-based scanner so long tool-call argument deltas and reasoning blocks no longer fail with `bufio.Scanner: token too long`. A 16 MiB `MaxLineSize` cap prevents unbounded allocation from a hostile stream. (#73)                                       |
+| **DeepSeek thinking-mode round-trip** | `internal/openaicompat` echoes `reasoning_content` back on assistant messages so DeepSeek thinking-mode survives multi-turn conversations instead of dropping the prior chain-of-thought. (#72)                                                                                                                            |
 
 ### Planned
 
